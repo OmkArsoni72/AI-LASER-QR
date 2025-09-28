@@ -20,44 +20,47 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true
-        }}
-      >
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full bg-background">
-            <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <Header />
-              <main className="flex-1 overflow-auto">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/components" element={<ComponentsPage />} />
-                  <Route path="/components/new" element={<ComponentNewPage />} />
-                  <Route path="/qr/generate" element={<QRGeneratePage />} />
-                  <Route path="/scan" element={<ScannerPage />} />
-                  <Route path="/analytics" element={<AnalyticsPage />} />
-                  <Route path="/vendors" element={<VendorsPage />} />
-                  <Route path="/warranty" element={<WarrantyPage />} />
-                  <Route path="/users" element={<UsersPage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
+const App = () => {
+  console.log("App.tsx: App component rendering");
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+          }}
+        >
+          <SidebarProvider>
+            <div className="min-h-screen flex w-full bg-background">
+              <AppSidebar />
+              <div className="flex-1 flex flex-col">
+                <Header />
+                <main className="flex-1 overflow-auto">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/components" element={<ComponentsPage />} />
+                    <Route path="/components/new" element={<ComponentNewPage />} />
+                    <Route path="/qr/generate" element={<QRGeneratePage />} />
+                    <Route path="/scan" element={<ScannerPage />} />
+                    <Route path="/analytics" element={<AnalyticsPage />} />
+                    <Route path="/vendors" element={<VendorsPage />} />
+                    <Route path="/warranty" element={<WarrantyPage />} />
+                    <Route path="/users" element={<UsersPage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+              </div>
             </div>
-          </div>
-        </SidebarProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+          </SidebarProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
