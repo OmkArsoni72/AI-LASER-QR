@@ -8,13 +8,13 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 248 249 250;
+    --background: 200 30% 98%;
     --foreground: 203 64% 7%;
 
-    --card: 0 0% 100%;
+    --card: 200 20% 99%;
     --card-foreground: 203 64% 7%;
 
-    --popover: 0 0% 100%;
+    --popover: 200 20% 99%;
     --popover-foreground: 203 64% 7%;
 
     --primary: 203 100% 20%; /* Indian Railway Blue #003366 */
@@ -23,10 +23,10 @@ All colors MUST be HSL.
     --secondary: 200 85% 60%; /* Light Blue */
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 200 25% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 200 25% 96%;
     --accent-foreground: 203 64% 7%;
 
     --success: 142 71% 45%; /* Green #28A745 */
@@ -48,7 +48,7 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(203 100% 20%), hsl(203 100% 35%));
     --gradient-secondary: linear-gradient(135deg, hsl(200 85% 60%), hsl(200 85% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(203 100% 20%) 0%, hsl(200 85% 60%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(248 249 250) 0%, hsl(240 5% 96%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(200 30% 98%) 0%, hsl(200 25% 96%) 100%);
 
     /* Shadows with railway colors */
     --shadow-primary: 0 10px 30px -10px hsl(203 100% 20% / 0.3);
@@ -59,13 +59,13 @@ All colors MUST be HSL.
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 200 25% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 203 100% 20%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 200 20% 95%;
     --sidebar-accent-foreground: 203 100% 20%;
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 200 15% 91%;
     --sidebar-ring: 203 100% 20%;
   }
 
