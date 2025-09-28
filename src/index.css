@@ -20,7 +20,7 @@ All colors MUST be HSL.
     --primary: 203 100% 20%; /* Indian Railway Blue #003366 */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 30 100% 52%; /* Orange #FF6600 */
+    --secondary: 200 85% 60%; /* Light Blue */
     --secondary-foreground: 0 0% 98%;
 
     --muted: 210 40% 96.1%;
@@ -32,8 +32,8 @@ All colors MUST be HSL.
     --success: 142 71% 45%; /* Green #28A745 */
     --success-foreground: 0 0% 98%;
 
-    --warning: 45 100% 51%; /* Yellow #FFC107 */
-    --warning-foreground: 203 64% 7%;
+    --warning: 200 85% 65%; /* Light Blue Warning */
+    --warning-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%; /* Red #DC3545 */
     --destructive-foreground: 0 0% 98%;
@@ -46,13 +46,13 @@ All colors MUST be HSL.
 
     /* Railway-specific gradients */
     --gradient-primary: linear-gradient(135deg, hsl(203 100% 20%), hsl(203 100% 35%));
-    --gradient-secondary: linear-gradient(135deg, hsl(30 100% 52%), hsl(30 100% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(203 100% 20%) 0%, hsl(30 100% 52%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(200 85% 60%), hsl(200 85% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(203 100% 20%) 0%, hsl(200 85% 60%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(248 249 250) 0%, hsl(240 5% 96%) 100%);
 
     /* Shadows with railway colors */
     --shadow-primary: 0 10px 30px -10px hsl(203 100% 20% / 0.3);
-    --shadow-secondary: 0 10px 30px -10px hsl(30 100% 52% / 0.3);
+    --shadow-secondary: 0 10px 30px -10px hsl(200 85% 60% / 0.3);
     --shadow-elegant: 0 4px 20px -4px hsl(203 100% 20% / 0.25);
     
     /* Animation easing */
@@ -82,7 +82,7 @@ All colors MUST be HSL.
     --primary: 203 100% 35%;
     --primary-foreground: 203 64% 7%;
 
-    --secondary: 30 100% 65%;
+    --secondary: 200 85% 70%;
     --secondary-foreground: 203 64% 7%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -94,7 +94,7 @@ All colors MUST be HSL.
     --success: 142 71% 55%;
     --success-foreground: 203 64% 7%;
 
-    --warning: 45 100% 61%;
+    --warning: 200 85% 75%;
     --warning-foreground: 203 64% 7%;
 
     --destructive: 0 84% 70%;
@@ -105,12 +105,12 @@ All colors MUST be HSL.
     --ring: 203 100% 35%;
 
     --gradient-primary: linear-gradient(135deg, hsl(203 100% 35%), hsl(203 100% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(30 100% 65%), hsl(30 100% 80%));
-    --gradient-hero: linear-gradient(135deg, hsl(203 100% 35%) 0%, hsl(30 100% 65%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(200 85% 70%), hsl(200 85% 80%));
+    --gradient-hero: linear-gradient(135deg, hsl(203 100% 35%) 0%, hsl(200 85% 70%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(203 64% 7%) 0%, hsl(217.2 32.6% 17.5%) 100%);
 
     --shadow-primary: 0 10px 30px -10px hsl(203 100% 35% / 0.4);
-    --shadow-secondary: 0 10px 30px -10px hsl(30 100% 65% / 0.4);
+    --shadow-secondary: 0 10px 30px -10px hsl(200 85% 70% / 0.4);
     --shadow-elegant: 0 4px 20px -4px hsl(203 100% 35% / 0.35);
 
     --sidebar-background: 203 64% 7%;
