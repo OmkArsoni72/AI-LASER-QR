@@ -66,4 +66,4 @@ Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
->>>>>>>>>>>>>>some changes by omkar soni
+>>>>>>>>>>>>>>some changes by omkar 
