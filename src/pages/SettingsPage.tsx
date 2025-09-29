@@ -1,4 +1,28 @@
-import { Card, CardCo    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import { Separator } from '@/components/ui/separator';
+import { 
+  Settings, 
+  User, 
+  Bell, 
+  Shield, 
+  Database,
+  Mail,
+  Smartphone,
+  Globe,
+  Download,
+  Upload,
+  Trash2,
+  Save
+} from 'lucide-react';
+
+const SettingsPage = () => {
+  return (
+    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="min-w-0">
@@ -7,151 +31,64 @@ import { Card, CardCo    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-
             Configure system preferences and account settings
           </p>
         </div>
-      </div>dDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { 
-  Settings, 
-  Globe, 
-  Bell, 
-  Shield, 
-  Download,
-  Upload,
-  Smartphone,
-  Wifi,
-  Database
-} from 'lucide-react';
-
-const SettingsPage = () => {
-  return (
-    <div className="flex-1 space-y-6 p-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-          <p className="text-muted-foreground mt-1">
-            Configure system preferences and application settings
-          </p>
-        </div>
+        
+        <Button className="bg-gradient-hero text-white hover:opacity-90 btn-mobile shrink-0">
+          <Save className="mr-2 h-4 w-4" />
+          <span className="hidden sm:inline">Save Changes</span>
+          <span className="sm:hidden">Save</span>
+        </Button>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* PWA Settings */}
+      {/* Settings Categories */}
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
+        {/* Account Settings */}
         <Card className="railway-card">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Smartphone className="mr-2 h-5 w-5 text-primary" />
-              Progressive Web App
+              <User className="mr-2 h-5 w-5 text-primary" />
+              Account Settings
             </CardTitle>
             <CardDescription>
-              Mobile app features and offline capabilities
+              Manage your personal account information
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="pwa-enabled">Enable PWA Features</Label>
-                <p className="text-sm text-muted-foreground">
-                  Allow installation as a mobile app
-                </p>
-              </div>
-              <Switch id="pwa-enabled" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="offline-mode">Offline Mode</Label>
-                <p className="text-sm text-muted-foreground">
-                  Cache data for offline access
-                </p>
-              </div>
-              <Switch id="offline-mode" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="push-notifications">Push Notifications</Label>
-                <p className="text-sm text-muted-foreground">
-                  Receive important updates
-                </p>
-              </div>
-              <Switch id="push-notifications" />
-            </div>
-
-            <Separator />
-
+          <CardContent className="space-y-4">
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Cache Status</span>
-                <Badge className="railway-badge-success">
-                  <Wifi className="mr-1 h-3 w-3" />
-                  Online
-                </Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Cached Data</span>
-                <span className="text-sm">2.4 MB</span>
-              </div>
-              <Button variant="outline" size="sm" className="w-full">
-                Clear Cache
-              </Button>
+              <Label htmlFor="fullName">Full Name</Label>
+              <Input
+                id="fullName"
+                defaultValue="Rajesh Kumar"
+                className="form-mobile"
+              />
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Language & Localization */}
-        <Card className="railway-card">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Globe className="mr-2 h-5 w-5 text-primary" />
-              Language & Localization
-            </CardTitle>
-            <CardDescription>
-              Configure language and regional settings
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
+            
             <div className="space-y-2">
-              <Label htmlFor="language">Interface Language</Label>
-              <div className="flex space-x-2">
-                <Button variant="outline" size="sm" className="flex-1">
-                  English
-                </Button>
-                <Button variant="ghost" size="sm" className="flex-1">
-                  हिंदी
-                </Button>
-              </div>
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                defaultValue="rajesh.kumar@indianrailways.gov.in"
+                className="form-mobile"
+              />
             </div>
-
+            
             <div className="space-y-2">
-              <Label htmlFor="timezone">Timezone</Label>
-              <Input id="timezone" value="Asia/Kolkata (IST)" disabled />
+              <Label htmlFor="department">Department</Label>
+              <Input
+                id="department"
+                defaultValue="Railway Engineering"
+                className="form-mobile"
+              />
             </div>
-
+            
             <div className="space-y-2">
-              <Label htmlFor="date-format">Date Format</Label>
-              <div className="flex space-x-2">
-                <Button variant="outline" size="sm">
-                  DD/MM/YYYY
-                </Button>
-                <Button variant="ghost" size="sm">
-                  MM/DD/YYYY
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="rtl-support">RTL Support</Label>
-                <p className="text-sm text-muted-foreground">
-                  Right-to-left text direction
-                </p>
-              </div>
-              <Switch id="rtl-support" />
+              <Label htmlFor="employeeId">Employee ID</Label>
+              <Input
+                id="employeeId"
+                defaultValue="ENG-2024-001"
+                className="form-mobile"
+                disabled
+              />
             </div>
           </CardContent>
         </Card>
@@ -164,60 +101,54 @@ const SettingsPage = () => {
               Notifications
             </CardTitle>
             <CardDescription>
-              Configure notification preferences
+              Configure how you receive notifications
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="warranty-alerts">Warranty Expiry Alerts</Label>
-                <p className="text-sm text-muted-foreground">
-                  90 days before expiry
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Email Notifications</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Receive alerts via email
                 </p>
               </div>
-              <Switch id="warranty-alerts" defaultChecked />
+              <Switch defaultChecked />
             </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="defect-alerts">Defect Notifications</Label>
-                <p className="text-sm text-muted-foreground">
-                  Immediate defect reports
-                </p>
-              </div>
-              <Switch id="defect-alerts" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="claim-updates">Claim Status Updates</Label>
-                <p className="text-sm text-muted-foreground">
-                  Warranty claim decisions
-                </p>
-              </div>
-              <Switch id="claim-updates" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="system-maintenance">System Maintenance</Label>
-                <p className="text-sm text-muted-foreground">
-                  Scheduled downtime notices
-                </p>
-              </div>
-              <Switch id="system-maintenance" />
-            </div>
-
+            
             <Separator />
-
-            <div className="space-y-2">
-              <Label htmlFor="notification-email">Notification Email</Label>
-              <Input 
-                id="notification-email" 
-                type="email" 
-                placeholder="admin@indianrailways.gov.in"
-                defaultValue="admin@indianrailways.gov.in"
-              />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">SMS Alerts</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Critical alerts via SMS
+                </p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            
+            <Separator />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Desktop Notifications</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Browser notifications
+                </p>
+              </div>
+              <Switch />
+            </div>
+            
+            <Separator />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Warranty Reminders</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Upcoming warranty expirations
+                </p>
+              </div>
+              <Switch defaultChecked />
             </div>
           </CardContent>
         </Card>
@@ -227,165 +158,242 @@ const SettingsPage = () => {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Shield className="mr-2 h-5 w-5 text-primary" />
-              Security & Privacy
+              Security
             </CardTitle>
             <CardDescription>
-              Security policies and data protection
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="auto-logout">Auto Logout</Label>
-                <p className="text-sm text-muted-foreground">
-                  After 30 minutes of inactivity
-                </p>
-              </div>
-              <Switch id="auto-logout" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="audit-logging">Audit Logging</Label>
-                <p className="text-sm text-muted-foreground">
-                  Track all user actions
-                </p>
-              </div>
-              <Switch id="audit-logging" defaultChecked />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="data-encryption">Data Encryption</Label>
-                <p className="text-sm text-muted-foreground">
-                  Encrypt sensitive information
-                </p>
-              </div>
-              <Switch id="data-encryption" defaultChecked disabled />
-            </div>
-
-            <Separator />
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Security Level</span>
-                <Badge className="railway-badge-success">High</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Last Backup</span>
-                <span className="text-sm">2 hours ago</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Data Management */}
-        <Card className="railway-card">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Database className="mr-2 h-5 w-5 text-primary" />
-              Data Management
-            </CardTitle>
-            <CardDescription>
-              Import, export, and backup settings
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-4">
-              <Button variant="outline" className="w-full justify-start">
-                <Download className="mr-2 h-4 w-4" />
-                Export Component Data
-              </Button>
-              
-              <Button variant="outline" className="w-full justify-start">
-                <Upload className="mr-2 h-4 w-4" />
-                Import CSV Data
-              </Button>
-              
-              <Button variant="outline" className="w-full justify-start">
-                <Database className="mr-2 h-4 w-4" />
-                Backup Database
-              </Button>
-            </div>
-
-            <Separator />
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Storage Used</span>
-                <span className="text-sm">45.2 MB / 100 MB</span>
-              </div>
-              <div className="w-full bg-muted rounded-full h-2">
-                <div className="bg-primary h-2 rounded-full" style={{ width: '45%' }}></div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="auto-cleanup">Auto Cleanup</Label>
-                <p className="text-sm text-muted-foreground">
-                  Remove old data after 5 years
-                </p>
-              </div>
-              <Switch id="auto-cleanup" defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* System Information */}
-        <Card className="railway-card">
-          <CardHeader>
-            <CardTitle>System Information</CardTitle>
-            <CardDescription>
-              Current system status and version details
+              Manage your account security settings
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Version</p>
-                <p className="text-sm font-mono">v1.0.0</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Build</p>
-                <p className="text-sm font-mono">#2025.01</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Environment</p>
-                <Badge className="railway-badge-warning">Production</Badge>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Uptime</p>
-                <p className="text-sm">7 days, 14 hours</p>
-              </div>
-            </div>
-
-            <Separator />
-
             <div className="space-y-2">
-              <h4 className="font-semibold text-sm">Recent Updates</h4>
-              <div className="space-y-1 text-sm">
-                <div className="flex justify-between">
-                  <span>QR scanning improvements</span>
-                  <span className="text-muted-foreground">Jan 10</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Warranty management update</span>
-                  <span className="text-muted-foreground">Jan 05</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Analytics dashboard refresh</span>
-                  <span className="text-muted-foreground">Dec 28</span>
-                </div>
-              </div>
+              <Label htmlFor="currentPassword">Current Password</Label>
+              <Input
+                id="currentPassword"
+                type="password"
+                placeholder="Enter current password"
+                className="form-mobile"
+              />
             </div>
-
-            <Button variant="outline" className="w-full">
-              Check for Updates
+            
+            <div className="space-y-2">
+              <Label htmlFor="newPassword">New Password</Label>
+              <Input
+                id="newPassword"
+                type="password"
+                placeholder="Enter new password"
+                className="form-mobile"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirm New Password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm new password"
+                className="form-mobile"
+              />
+            </div>
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Two-Factor Authentication</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Add an extra layer of security
+                </p>
+              </div>
+              <Badge variant="outline" className="text-xs">
+                Not Configured
+              </Badge>
+            </div>
+            
+            <Button variant="outline" className="w-full btn-mobile">
+              <Smartphone className="mr-2 h-4 w-4" />
+              Setup 2FA
             </Button>
           </CardContent>
         </Card>
+
+        {/* System Preferences */}
+        <Card className="railway-card">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Settings className="mr-2 h-5 w-5 text-primary" />
+              System Preferences
+            </CardTitle>
+            <CardDescription>
+              Customize your system experience
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Dark Mode</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Switch to dark theme
+                </p>
+              </div>
+              <Switch />
+            </div>
+            
+            <Separator />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <Label className="text-responsive-sm font-medium">Auto-save Forms</Label>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Automatically save form data
+                </p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            
+            <Separator />
+            
+            <div className="space-y-2">
+              <Label htmlFor="language">Language</Label>
+              <select 
+                id="language"
+                aria-label="Select language"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm form-mobile"
+                defaultValue="en"
+              >
+                <option value="en">English</option>
+                <option value="hi">हिंदी (Hindi)</option>
+                <option value="mr">मराठी (Marathi)</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+              </select>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="timezone">Timezone</Label>
+              <select 
+                id="timezone"
+                aria-label="Select timezone"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm form-mobile"
+                defaultValue="IST"
+              >
+                <option value="IST">India Standard Time (IST)</option>
+                <option value="UTC">Coordinated Universal Time (UTC)</option>
+              </select>
+            </div>
+          </CardContent>
+        </Card>
       </div>
+
+      {/* Data Management */}
+      <Card className="railway-card">
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Database className="mr-2 h-5 w-5 text-primary" />
+            Data Management
+          </CardTitle>
+          <CardDescription>
+            Export, import, and manage your data
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <Button variant="outline" className="btn-mobile">
+              <Download className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Export Data</span>
+              <span className="sm:hidden">Export</span>
+            </Button>
+            
+            <Button variant="outline" className="btn-mobile">
+              <Upload className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Import Data</span>
+              <span className="sm:hidden">Import</span>
+            </Button>
+            
+            <Button variant="outline" className="btn-mobile">
+              <Globe className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Sync Settings</span>
+              <span className="sm:hidden">Sync</span>
+            </Button>
+            
+            <Button variant="outline" className="btn-mobile text-destructive hover:bg-destructive hover:text-destructive-foreground">
+              <Trash2 className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Clear Cache</span>
+              <span className="sm:hidden">Clear</span>
+            </Button>
+          </div>
+          
+          <Separator className="my-6" />
+          
+          <div className="bg-muted/30 rounded-lg p-4">
+            <h4 className="font-semibold text-responsive-sm mb-2">Storage Usage</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span>Component Data:</span>
+                <span>145 MB</span>
+              </div>
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span>QR Code Cache:</span>
+                <span>23 MB</span>
+              </div>
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span>Analytics Cache:</span>
+                <span>12 MB</span>
+              </div>
+              <Separator className="my-2" />
+              <div className="flex justify-between text-xs sm:text-sm font-medium">
+                <span>Total:</span>
+                <span>180 MB</span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* System Information */}
+      <Card className="railway-card">
+        <CardHeader>
+          <CardTitle>System Information</CardTitle>
+          <CardDescription>
+            Application and system details
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
+            <div className="space-y-2">
+              <h4 className="font-semibold text-responsive-sm">Application</h4>
+              <div className="space-y-1 text-xs sm:text-sm">
+                <div className="flex justify-between">
+                  <span>Version:</span>
+                  <Badge variant="outline">v1.0.0</Badge>
+                </div>
+                <div className="flex justify-between">
+                  <span>Build:</span>
+                  <span className="font-mono">2025.09.29</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Environment:</span>
+                  <Badge className="railway-badge-success">Production</Badge>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <h4 className="font-semibold text-responsive-sm">System</h4>
+              <div className="space-y-1 text-xs sm:text-sm">
+                <div className="flex justify-between">
+                  <span>OS:</span>
+                  <span>Windows 11</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Browser:</span>
+                  <span>Chrome 120.0</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Last Update:</span>
+                  <span>2025-09-29</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
