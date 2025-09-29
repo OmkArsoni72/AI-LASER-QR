@@ -6,7 +6,6 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Explicit base path so asset URLs resolve correctly in deployment.
-  // If you ever deploy under a sub-path (e.g. /app), change this to that path or to './'.
   base: '/',
   server: {
     host: "::",
@@ -17,16 +16,23 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Ensure React is resolved correctly to prevent createContext undefined errors
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
     build: {
-      chunkSizeWarningLimit: 2000, // Increase limit to 2000 KB
+      chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('react')) return 'vendor-react';
-              if (id.includes('@mui')) return 'vendor-mui';
-              if (id.includes('chart.js')) return 'vendor-chartjs';
+              // Keep React and ReactDOM together to avoid context issues
+              if (id.includes('react') || id.includes('react-dom')) return 'vendor-react';
+              if (id.includes('@radix-ui')) return 'vendor-radix';
+              if (id.includes('@tanstack')) return 'vendor-tanstack';
+              if (id.includes('recharts')) return 'vendor-charts';
               return 'vendor';
             }
           },

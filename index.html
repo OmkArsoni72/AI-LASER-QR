@@ -3,18 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trackwise-rail-sync</title>
-    <meta name="description" content="Project" />
-    <meta name="author" content="Lovable" />
+    <title>AI-LASER-QR - TrackWise Rail Sync</title>
+    <meta name="description" content="Railway component tracking with AI and QR technology" />
+    <meta name="author" content="OmkArsoni72" />
 
-    <meta property="og:title" content="trackwise-rail-sync" />
-    <meta property="og:description" content="Project" />
+    <meta property="og:title" content="AI-LASER-QR - TrackWise Rail Sync" />
+    <meta property="og:description" content="Railway component tracking with AI and QR technology" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:site" content="@OmkArsoni72" />
     <meta name="twitter:image" content="" />
+    
+    <style>
+      /* Fallback styles if JS fails to load */
+      #root:empty::before {
+        content: "Loading...";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 1.2rem;
+        color: #666;
+      }
+      
+      /* Hide loading text once React renders */
+      #root:not(:empty)::before {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
