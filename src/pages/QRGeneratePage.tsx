@@ -83,37 +83,45 @@ const QRGeneratePage = () => {
   }) : '';
 
   return (
-    <div className="flex-1 space-y-6 p-6">
+    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">QR Code Generation</h1>
-          <p className="text-muted-foreground mt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-responsive-xl font-bold text-foreground truncate">QR Code Generation</h1>
+          <p className="text-responsive-sm text-muted-foreground mt-1">
             Generate QR codes for single components or batch processing
           </p>
         </div>
         
-        <div className="flex space-x-3">
-          <Button variant="outline">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 shrink-0">
+          <Button variant="outline" className="btn-mobile">
             <FileText className="mr-2 h-4 w-4" />
-            Sample CSV
+            <span className="hidden sm:inline">Sample CSV</span>
+            <span className="sm:hidden">Sample</span>
           </Button>
-          <Button onClick={handleDownloadPDF} className="bg-gradient-secondary text-white">
+          <Button onClick={handleDownloadPDF} className="bg-gradient-secondary text-white btn-mobile">
             <Download className="mr-2 h-4 w-4" />
-            Download PDF
+            <span className="hidden sm:inline">Download PDF</span>
+            <span className="sm:hidden">Download</span>
           </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="single" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="single">Single Component</TabsTrigger>
-          <TabsTrigger value="batch">Batch Generation</TabsTrigger>
+      <Tabs defaultValue="single" className="space-y-4 sm:space-y-6">
+        <TabsList className="grid w-full grid-cols-2 h-auto p-1">
+          <TabsTrigger value="single" className="text-responsive-sm py-2 px-3">
+            <span className="hidden sm:inline">Single Component</span>
+            <span className="sm:hidden">Single</span>
+          </TabsTrigger>
+          <TabsTrigger value="batch" className="text-responsive-sm py-2 px-3">
+            <span className="hidden sm:inline">Batch Generation</span>
+            <span className="sm:hidden">Batch</span>
+          </TabsTrigger>
         </TabsList>
 
         {/* Single Component QR Generation */}
-        <TabsContent value="single" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2">
+        <TabsContent value="single" className="space-y-4 sm:space-y-6">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
             <Card className="railway-card">
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -152,28 +160,31 @@ const QRGeneratePage = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col items-center space-y-4">
-                  <div className="p-4 bg-white rounded-lg border-2 border-border">
+                  <div className="p-3 sm:p-4 bg-white rounded-lg border-2 border-border">
                     <QRCodeSVG
                       value={sampleQRData || 'Sample QR Code'}
-                      size={150}
+                      size={120}
                       level="H"
                       includeMargin={true}
+                      className="w-full h-auto max-w-[150px]"
                     />
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium">Component ID</p>
-                    <p className="text-xs text-muted-foreground font-mono">
+                    <p className="text-responsive-sm font-medium">Component ID</p>
+                    <p className="text-xs text-muted-foreground font-mono break-all">
                       {sampleComponent?.id || 'RC-001-2025-001'}
                     </p>
                   </div>
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
+                  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                    <Button variant="outline" size="sm" className="btn-mobile">
                       <Download className="mr-2 h-4 w-4" />
-                      Download SVG
+                      <span className="hidden sm:inline">Download SVG</span>
+                      <span className="sm:hidden">Download</span>
                     </Button>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="btn-mobile">
                       <Printer className="mr-2 h-4 w-4" />
-                      Print Label
+                      <span className="hidden sm:inline">Print Label</span>
+                      <span className="sm:hidden">Print</span>
                     </Button>
                   </div>
                 </div>
@@ -183,8 +194,8 @@ const QRGeneratePage = () => {
         </TabsContent>
 
         {/* Batch QR Generation */}
-        <TabsContent value="batch" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2">
+        <TabsContent value="batch" className="space-y-4 sm:space-y-6">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
             <Card className="railway-card">
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -198,15 +209,16 @@ const QRGeneratePage = () => {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="csvFile">Upload CSV File</Label>
-                  <div className="flex space-x-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <Input
                       id="csvFile"
                       type="file"
                       accept=".csv"
-                      className="flex-1"
+                      className="flex-1 form-mobile"
                     />
-                    <Button variant="outline">
+                    <Button variant="outline" className="btn-mobile">
                       <Upload className="h-4 w-4" />
+                      <span className="ml-2 sm:hidden">Upload</span>
                     </Button>
                   </div>
                 </div>
@@ -224,7 +236,7 @@ const QRGeneratePage = () => {
                     placeholder="id,type,manufacturer,batchNumber,installDate,warrantyExpiry,latitude,longitude,section,kilometer,vendorId
 RC-001-2025-001,Rail Clip,ABC Industries,B-2025-001,2025-01-15,2030-01-15,28.7041,77.1025,Delhi-Gurgaon,KM 15.5,V-007"
                     rows={6}
-                    className="font-mono text-sm"
+                    className="font-mono text-sm form-mobile resize-none"
                   />
                 </div>
                 
@@ -245,44 +257,47 @@ RC-001-2025-001,Rail Clip,ABC Industries,B-2025-001,2025-01-15,2030-01-15,28.704
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {[...Array(6)].map((_, i) => (
                       <div key={i} className="aspect-square bg-white border border-border rounded flex items-center justify-center">
                         <QRCodeSVG
                           value={`Sample QR ${i + 1}`}
-                          size={60}
+                          size={40}
                           level="H"
+                          className="w-full h-auto max-w-[60px]"
                         />
                       </div>
                     ))}
                   </div>
                   
-                  <div className="bg-muted/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-sm mb-2">Batch Settings</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
+                  <div className="bg-muted/30 rounded-lg p-3 sm:p-4">
+                    <h4 className="font-semibold text-responsive-sm mb-2">Batch Settings</h4>
+                    <div className="space-y-2 text-xs sm:text-sm">
+                      <div className="flex justify-between items-center">
                         <span>Layout:</span>
-                        <Badge variant="secondary">A4 - 6x4 Grid</Badge>
+                        <Badge variant="secondary" className="text-xs">A4 - 6x4 Grid</Badge>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span>Label Size:</span>
-                        <Badge variant="secondary">40x25mm</Badge>
+                        <Badge variant="secondary" className="text-xs">40x25mm</Badge>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span>QR Size:</span>
-                        <Badge variant="secondary">15x15mm</Badge>
+                        <Badge variant="secondary" className="text-xs">15x15mm</Badge>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="sm" className="flex-1">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button variant="outline" size="sm" className="flex-1 btn-mobile">
                       <FileText className="mr-2 h-4 w-4" />
-                      Preview PDF
+                      <span className="hidden sm:inline">Preview PDF</span>
+                      <span className="sm:hidden">Preview</span>
                     </Button>
-                    <Button size="sm" className="flex-1 bg-gradient-secondary text-white">
+                    <Button size="sm" className="flex-1 bg-gradient-secondary text-white btn-mobile">
                       <Download className="mr-2 h-4 w-4" />
-                      Download All
+                      <span className="hidden sm:inline">Download All</span>
+                      <span className="sm:hidden">Download</span>
                     </Button>
                   </div>
                 </div>
@@ -301,10 +316,10 @@ RC-001-2025-001,Rail Clip,ABC Industries,B-2025-001,2025-01-15,2030-01-15,28.704
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div className="space-y-2">
-              <h4 className="font-semibold">Laser Settings</h4>
-              <div className="space-y-1 text-sm">
+              <h4 className="font-semibold text-responsive-sm">Laser Settings</h4>
+              <div className="space-y-1 text-xs sm:text-sm">
                 <div className="flex justify-between">
                   <span>Power:</span>
                   <span className="font-mono">80%</span>
@@ -321,28 +336,30 @@ RC-001-2025-001,Rail Clip,ABC Industries,B-2025-001,2025-01-15,2030-01-15,28.704
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-semibold">Material Compatibility</h4>
-              <div className="space-y-1 text-sm">
-                <Badge variant="outline">Stainless Steel</Badge>
-                <Badge variant="outline">Aluminum</Badge>
-                <Badge variant="outline">Anodized Metal</Badge>
-                <Badge variant="outline">Plastic Labels</Badge>
+              <h4 className="font-semibold text-responsive-sm">Material Compatibility</h4>
+              <div className="flex flex-wrap gap-1 text-xs sm:text-sm">
+                <Badge variant="outline" className="text-xs">Stainless Steel</Badge>
+                <Badge variant="outline" className="text-xs">Aluminum</Badge>
+                <Badge variant="outline" className="text-xs">Anodized Metal</Badge>
+                <Badge variant="outline" className="text-xs">Plastic Labels</Badge>
               </div>
             </div>
             
-            <div className="space-y-2">
-              <h4 className="font-semibold">QR Data Format</h4>
-              <div className="text-xs font-mono bg-muted p-2 rounded">
-                {JSON.stringify({
-                  id: "RC-001-2025-001",
-                  type: "Rail Clip",
-                  manufacturer: "ABC Industries",
-                  installDate: "2025-01-15",
-                  location: {
-                    section: "Delhi-Gurgaon",
-                    kilometer: "KM 15.5"
-                  }
-                }, null, 2)}
+            <div className="space-y-2 md:col-span-2 lg:col-span-1">
+              <h4 className="font-semibold text-responsive-sm">QR Data Format</h4>
+              <div className="text-xs font-mono bg-muted p-2 rounded overflow-x-auto">
+                <pre className="whitespace-pre-wrap break-words">
+                  {JSON.stringify({
+                    id: "RC-001-2025-001",
+                    type: "Rail Clip",
+                    manufacturer: "ABC Industries",
+                    installDate: "2025-01-15",
+                    location: {
+                      section: "Delhi-Gurgaon",
+                      kilometer: "KM 15.5"
+                    }
+                  }, null, 2)}
+                </pre>
               </div>
             </div>
           </div>

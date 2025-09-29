@@ -91,14 +91,14 @@ const ComponentsPage = () => {
   const isVendorView = currentUser?.role === 'vendor';
 
   return (
-    <div className="flex-1 space-y-6 p-6">
+    <div className="flex-1 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
             {isVendorView ? 'My Components' : 'Component Management'}
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
             {isVendorView 
               ? 'Track and manage your supplied components'
               : 'Manage railway track components and their lifecycle'
@@ -107,14 +107,14 @@ const ComponentsPage = () => {
         </div>
         
         {!isVendorView && (
-          <div className="flex space-x-3">
-            <Button asChild variant="outline">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:shrink-0">
+            <Button asChild variant="outline" className="w-full sm:w-auto" size="sm">
               <Link to="/qr/generate">
                 <QrCode className="mr-2 h-4 w-4" />
                 Generate QR Codes
               </Link>
             </Button>
-            <Button asChild className="bg-gradient-hero text-white hover:opacity-90">
+            <Button asChild className="bg-gradient-hero text-white hover:opacity-90 w-full sm:w-auto" size="sm">
               <Link to="/components/new">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Component
@@ -125,7 +125,7 @@ const ComponentsPage = () => {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card className="railway-card">
           <CardContent className="flex items-center p-6">
             <Package className="h-8 w-8 text-primary mr-4" />
@@ -224,18 +224,19 @@ const ComponentsPage = () => {
           </div>
 
           {/* Components Table */}
-          <div className="rounded-md border">
+          {/* Desktop Table View */}
+          <div className="hidden lg:block rounded-md border overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Component ID</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Manufacturer</TableHead>
-                  <TableHead>Location</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Warranty</TableHead>
-                  <TableHead>Install Date</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap">Component ID</TableHead>
+                  <TableHead className="whitespace-nowrap">Type</TableHead>
+                  <TableHead className="whitespace-nowrap">Manufacturer</TableHead>
+                  <TableHead className="whitespace-nowrap">Location</TableHead>
+                  <TableHead className="whitespace-nowrap">Status</TableHead>
+                  <TableHead className="whitespace-nowrap">Warranty</TableHead>
+                  <TableHead className="whitespace-nowrap">Install Date</TableHead>
+                  <TableHead className="text-right whitespace-nowrap">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -283,6 +284,68 @@ const ComponentsPage = () => {
                 })}
               </TableBody>
             </Table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="lg:hidden space-y-3">
+            {filteredComponents.map((component) => {
+              const warrantyStatus = getWarrantyStatus(component.warrantyExpiry);
+              
+              return (
+                <Card key={component.id} className="railway-card">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <p className="font-mono text-sm font-medium">{component.id}</p>
+                        <p className="text-xs text-muted-foreground">{component.type}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Badge className={`${getStatusBadgeVariant(component.status)} text-xs`}>
+                          {component.status}
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Manufacturer:</span>
+                        <span className="font-medium">{component.manufacturer}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Location:</span>
+                        <span className="font-medium flex items-center">
+                          <MapPin className="h-3 w-3 mr-1" />
+                          {component.location.section} {component.location.kilometer}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Warranty:</span>
+                        <Badge className={`${warrantyStatus.variant} text-xs`}>
+                          {warrantyStatus.status}
+                        </Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Installed:</span>
+                        <span className="font-medium">{format(new Date(component.installDate), 'MMM dd, yyyy')}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end space-x-2 mt-4 pt-3 border-t border-border/50">
+                      <Button variant="ghost" size="sm">
+                        <Eye className="h-4 w-4 mr-1" />
+                        View
+                      </Button>
+                      {!isVendorView && (
+                        <Button variant="ghost" size="sm">
+                          <Edit className="h-4 w-4 mr-1" />
+                          Edit
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
           
           {filteredComponents.length === 0 && (

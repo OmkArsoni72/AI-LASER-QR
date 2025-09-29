@@ -29,34 +29,37 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
-        <div className="flex items-center space-x-4">
-          <SidebarTrigger className="ml-2" />
-          <div className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-hero text-white">
-              <Train className="h-6 w-6" />
+      <div className="flex h-14 sm:h-16 items-center justify-between px-2 sm:px-4">
+        <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
+          <SidebarTrigger className="shrink-0" />
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-hero text-white shrink-0">
+              <Train className="h-4 w-4 sm:h-6 sm:w-6" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">Track Component Management</h1>
-              <p className="text-sm text-muted-foreground">Indian Railways</p>
+            <div className="min-w-0 hidden sm:block">
+              <h1 className="text-lg sm:text-xl font-bold text-foreground truncate">Track Component Management</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground">Indian Railways</p>
+            </div>
+            <div className="min-w-0 sm:hidden">
+              <h1 className="text-sm font-bold text-foreground">TCM</h1>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-1 sm:space-x-4 shrink-0">
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative h-8 w-8 sm:h-10 sm:w-10">
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
                 {metrics.pendingClaims > 0 && (
-                  <Badge className="absolute -right-2 -top-2 h-5 w-5 rounded-full p-0 text-xs bg-destructive text-destructive-foreground">
-                    {metrics.pendingClaims}
+                  <Badge className="absolute -right-1 -top-1 sm:-right-2 sm:-top-2 h-4 w-4 sm:h-5 sm:w-5 rounded-full p-0 text-xs bg-destructive text-destructive-foreground">
+                    {metrics.pendingClaims > 9 ? '9+' : metrics.pendingClaims}
                   </Badge>
                 )}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80">
+            <DropdownMenuContent align="end" className="w-72 sm:w-80">
               <DropdownMenuLabel>Notifications</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>

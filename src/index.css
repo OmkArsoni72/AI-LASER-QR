@@ -233,3 +233,113 @@ All colors MUST be HSL.
     transform: scale(1);
   }
 }
+
+/* Mobile-specific responsive utilities */
+@layer utilities {
+  /* Mobile-first responsive text sizes */
+  .text-responsive-xs { @apply text-xs sm:text-sm; }
+  .text-responsive-sm { @apply text-sm sm:text-base; }
+  .text-responsive-base { @apply text-base sm:text-lg; }
+  .text-responsive-lg { @apply text-lg sm:text-xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl lg:text-3xl; }
+  .text-responsive-2xl { @apply text-2xl sm:text-3xl lg:text-4xl; }
+
+  /* Mobile-optimized spacing */
+  .space-responsive-sm > * + * { @apply mt-2 sm:mt-3; }
+  .space-responsive-md > * + * { @apply mt-3 sm:mt-4; }
+  .space-responsive-lg > * + * { @apply mt-4 sm:mt-6; }
+
+  /* Mobile-friendly padding/margins */
+  .p-responsive { @apply p-3 sm:p-4 lg:p-6; }
+  .px-responsive { @apply px-3 sm:px-4 lg:px-6; }
+  .py-responsive { @apply py-3 sm:py-4 lg:py-6; }
+  .m-responsive { @apply m-3 sm:m-4 lg:m-6; }
+
+  /* Touch-friendly interactive elements */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+
+  /* Mobile card layouts */
+  .mobile-card {
+    @apply railway-card p-4 space-y-3;
+  }
+
+  .mobile-card-header {
+    @apply flex items-start justify-between border-b border-border/50 pb-3;
+  }
+
+  .mobile-card-content {
+    @apply space-y-2 text-sm;
+  }
+
+  .mobile-card-actions {
+    @apply flex justify-end space-x-2 pt-3 border-t border-border/50;
+  }
+
+  /* Responsive grid utilities */
+  .grid-responsive-cards {
+    @apply grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .grid-responsive-metrics {
+    @apply grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
+  }
+
+  /* Mobile-friendly table alternatives */
+  .mobile-table-row {
+    @apply flex flex-col sm:flex-row sm:items-center justify-between p-3 border-b border-border/50 hover:bg-muted/30;
+  }
+
+  .mobile-table-cell {
+    @apply flex justify-between items-center py-1 sm:py-0;
+  }
+
+  .mobile-table-label {
+    @apply text-xs sm:text-sm text-muted-foreground font-medium;
+  }
+
+  .mobile-table-value {
+    @apply text-sm sm:text-base font-medium;
+  }
+}
+
+/* Mobile-specific media queries for fine-tuning */
+@media (max-width: 640px) {
+  /* Reduce sidebar width on mobile when collapsed */
+  .sidebar-mobile-collapsed {
+    width: 3rem !important;
+  }
+
+  /* Ensure buttons are touch-friendly */
+  .btn-mobile {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Optimize form inputs for mobile */
+  .form-mobile input,
+  .form-mobile select,
+  .form-mobile textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Mobile-optimized modal/dialog */
+  .modal-mobile {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    width: calc(100vw - 2rem);
+  }
+}
+
+@media (max-width: 375px) {
+  /* Extra small screens (iPhone SE, etc.) */
+  .text-responsive-xl {
+    font-size: 1.125rem !important; /* Smaller on very small screens */
+  }
+
+  .grid-responsive-metrics {
+    grid-template-columns: 1fr 1fr; /* Always 2 columns on tiny screens */
+  }
+}

@@ -117,19 +117,20 @@ const AnalyticsPage = () => {
   ];
 
   return (
-    <div className="flex-1 space-y-6 p-6">
+    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Analytics Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-responsive-xl font-bold text-foreground">Analytics Dashboard</h1>
+          <p className="text-responsive-sm text-muted-foreground mt-1">
             Insights and trends for railway component management
           </p>
         </div>
         
-        <Button variant="outline">
+        <Button variant="outline" className="btn-mobile shrink-0">
           <Download className="mr-2 h-4 w-4" />
-          Export Report
+          <span className="hidden sm:inline">Export Report</span>
+          <span className="sm:hidden">Export</span>
         </Button>
       </div>
 
@@ -145,23 +146,23 @@ const AnalyticsPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {aiInsights.map((insight, index) => (
-              <div key={index} className="bg-muted/30 rounded-lg p-4 space-y-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className={`h-2 w-2 rounded-full ${
+              <div key={index} className="bg-muted/30 rounded-lg p-3 sm:p-4 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                  <div className="flex items-center space-x-2 min-w-0">
+                    <div className={`h-2 w-2 rounded-full shrink-0 ${
                       insight.type === 'warning' ? 'bg-warning' :
                       insight.type === 'alert' ? 'bg-destructive' : 'bg-primary'
                     }`} />
-                    <h4 className="font-semibold text-sm">{insight.title}</h4>
+                    <h4 className="font-semibold text-responsive-sm truncate">{insight.title}</h4>
                   </div>
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant="outline" className="text-xs shrink-0 self-start">
                     {insight.confidence}% confidence
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">{insight.description}</p>
-                <Button variant="outline" size="sm" className="w-full">
+                <p className="text-xs sm:text-sm text-muted-foreground">{insight.description}</p>
+                <Button variant="outline" size="sm" className="w-full btn-mobile">
                   {insight.action}
                 </Button>
               </div>
@@ -171,7 +172,7 @@ const AnalyticsPage = () => {
       </Card>
 
       {/* Charts Row 1 */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Component Distribution */}
         <Card className="railway-card">
           <CardHeader>
@@ -184,20 +185,21 @@ const AnalyticsPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={typeData}>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={typeData} margin={{ bottom: 60, left: 10, right: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
                   dataKey="type" 
-                  fontSize={12}
+                  fontSize={10}
                   interval={0}
                   angle={-45}
                   textAnchor="end"
-                  height={80}
+                  height={60}
                 />
-                <YAxis fontSize={12} />
+                <YAxis fontSize={10} />
                 <Tooltip 
                   formatter={(value, name, props) => [value, props.payload.fullType]}
+                  contentStyle={{ fontSize: '12px' }}
                 />
                 <Bar dataKey="count" fill="hsl(var(--primary))" />
               </BarChart>
@@ -217,21 +219,24 @@ const AnalyticsPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <RechartsPieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  outerRadius={100}
+                  outerRadius={80}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} (${(Number(percent) * 100).toFixed(0)}%)`}
+                  label={({ name, percent }) => window.innerWidth > 640 ? `${name} (${(Number(percent) * 100).toFixed(0)}%)` : `${(Number(percent) * 100).toFixed(0)}%`}
+                  labelLine={false}
+                  fontSize={12}
                 >
                   {pieData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ fontSize: '12px' }} />
+                <Legend wrapperStyle={{ fontSize: '12px' }} />
               </RechartsPieChart>
             </ResponsiveContainer>
           </CardContent>
@@ -239,7 +244,7 @@ const AnalyticsPage = () => {
       </div>
 
       {/* Charts Row 2 */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Warranty Expiration Timeline */}
         <Card className="railway-card">
           <CardHeader>
@@ -252,12 +257,12 @@ const AnalyticsPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={warrantyData}>
+            <ResponsiveContainer width="100%" height={250}>
+              <AreaChart data={warrantyData} margin={{ bottom: 20, left: 10, right: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" fontSize={12} />
-                <YAxis fontSize={12} />
-                <Tooltip />
+                <XAxis dataKey="month" fontSize={10} />
+                <YAxis fontSize={10} />
+                <Tooltip contentStyle={{ fontSize: '12px' }} />
                 <Area 
                   type="monotone" 
                   dataKey="expiring" 
@@ -279,24 +284,24 @@ const AnalyticsPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {vendorData.map((vendor, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                  <div className="space-y-1">
-                    <p className="font-medium text-sm" title={vendor.fullName}>
+                <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-muted/30 rounded-lg gap-2">
+                  <div className="space-y-1 min-w-0">
+                    <p className="font-medium text-responsive-sm truncate" title={vendor.fullName}>
                       {vendor.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {vendor.components} components • Rating: {vendor.rating}/5
                     </p>
                   </div>
-                  <div className="text-right space-y-1">
+                  <div className="flex justify-end sm:justify-start shrink-0">
                     <Badge 
-                      className={
+                      className={`text-xs ${
                         parseFloat(vendor.defectRate) < 5 ? 'railway-badge-success' :
                         parseFloat(vendor.defectRate) < 10 ? 'railway-badge-warning' :
                         'railway-badge-danger'
-                      }
+                      }`}
                     >
                       {vendor.defectRate}% defects
                     </Badge>
@@ -320,18 +325,18 @@ const AnalyticsPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-96 bg-muted/30 rounded-lg flex items-center justify-center border-2 border-dashed border-border">
-            <div className="text-center">
-              <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <p className="text-lg font-medium text-muted-foreground">Interactive Map</p>
-              <p className="text-sm text-muted-foreground">
+          <div className="h-64 sm:h-80 lg:h-96 bg-muted/30 rounded-lg flex items-center justify-center border-2 border-dashed border-border p-4">
+            <div className="text-center max-w-full">
+              <MapPin className="h-8 w-8 sm:h-12 sm:w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-responsive-base font-medium text-muted-foreground">Interactive Map</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2">
                 Component locations would be displayed here with clustering and filtering
               </p>
-              <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                <Badge variant="outline">Delhi-Gurgaon: 45 components</Badge>
-                <Badge variant="outline">Mumbai-Pune: 38 components</Badge>
-                <Badge variant="outline">Chennai-Bangalore: 32 components</Badge>
-                <Badge variant="outline">Others: 35 components</Badge>
+              <div className="mt-4 flex flex-wrap gap-1 sm:gap-2 justify-center">
+                <Badge variant="outline" className="text-xs">Delhi-Gurgaon: 45</Badge>
+                <Badge variant="outline" className="text-xs">Mumbai-Pune: 38</Badge>
+                <Badge variant="outline" className="text-xs">Chennai-Bangalore: 32</Badge>
+                <Badge variant="outline" className="text-xs">Others: 35</Badge>
               </div>
             </div>
           </div>
@@ -339,42 +344,42 @@ const AnalyticsPage = () => {
       </Card>
 
       {/* Summary Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
+          <CardContent className="flex items-center p-3 sm:p-6">
             <div className="space-y-1">
-              <p className="text-sm font-medium text-muted-foreground">Avg Warranty Remaining</p>
-              <p className="text-2xl font-bold">3.2 years</p>
-              <p className="text-xs text-muted-foreground">Across all components</p>
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground">Avg Warranty Remaining</p>
+              <p className="text-lg sm:text-2xl font-bold">3.2 years</p>
+              <p className="text-xs text-muted-foreground hidden sm:block">Across all components</p>
             </div>
           </CardContent>
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
+          <CardContent className="flex items-center p-3 sm:p-6">
             <div className="space-y-1">
-              <p className="text-sm font-medium text-muted-foreground">Overall Defect Rate</p>
-              <p className="text-2xl font-bold">4.2%</p>
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground">Overall Defect Rate</p>
+              <p className="text-lg sm:text-2xl font-bold">4.2%</p>
               <p className="text-xs text-success">↓ 1.3% from last month</p>
             </div>
           </CardContent>
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
+          <CardContent className="flex items-center p-3 sm:p-6">
             <div className="space-y-1">
-              <p className="text-sm font-medium text-muted-foreground">Inspection Coverage</p>
-              <p className="text-2xl font-bold">87%</p>
-              <p className="text-xs text-muted-foreground">Last 90 days</p>
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground">Inspection Coverage</p>
+              <p className="text-lg sm:text-2xl font-bold">87%</p>
+              <p className="text-xs text-muted-foreground hidden sm:block">Last 90 days</p>
             </div>
           </CardContent>
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
+          <CardContent className="flex items-center p-3 sm:p-6">
             <div className="space-y-1">
-              <p className="text-sm font-medium text-muted-foreground">Avg Resolution Time</p>
-              <p className="text-2xl font-bold">12 days</p>
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground">Avg Resolution Time</p>
+              <p className="text-lg sm:text-2xl font-bold">12 days</p>
               <p className="text-xs text-warning">↑ 2 days from target</p>
             </div>
           </CardContent>

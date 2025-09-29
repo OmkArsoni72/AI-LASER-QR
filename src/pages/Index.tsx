@@ -79,14 +79,14 @@ const Index = () => {
   const isVendorView = currentUser?.role === 'vendor';
 
   return (
-    <div className="flex-1 space-y-6 p-6 animate-fade-in">
+    <div className="flex-1 space-y-4 sm:space-y-6 animate-fade-in">
       {/* Welcome Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground truncate">
             Welcome back, {currentUser?.name}
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
             {isVendorView 
               ? 'Manage your components and warranty claims' 
               : 'Monitor and manage railway component infrastructure'
@@ -94,27 +94,27 @@ const Index = () => {
           </p>
         </div>
         
-        <div className="flex space-x-3">
-          <Button asChild variant="outline" className="border-primary/20 hover:bg-primary/5">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:shrink-0">
+          <Button asChild variant="outline" className="border-primary/20 hover:bg-primary/5 w-full sm:w-auto" size="sm">
             <Link to="/scan">
               <ScanLine className="mr-2 h-4 w-4" />
-              Quick Scan
+              <span className="sm:inline">Quick Scan</span>
             </Link>
           </Button>
           
           {!isVendorView && (
             <>
-              <Button asChild variant="outline" className="border-secondary/20 hover:bg-secondary/5">
+              <Button asChild variant="outline" className="border-secondary/20 hover:bg-secondary/5 w-full sm:w-auto" size="sm">
                 <Link to="/qr/generate">
                   <QrCode className="mr-2 h-4 w-4" />
-                  Generate QR
+                  <span className="sm:inline">Generate QR</span>
                 </Link>
               </Button>
               
-              <Button asChild className="bg-gradient-hero text-white hover:opacity-90">
+              <Button asChild className="bg-gradient-hero text-white hover:opacity-90 w-full sm:w-auto" size="sm">
                 <Link to="/components/new">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Component
+                  <span className="sm:inline">Add Component</span>
                 </Link>
               </Button>
             </>
@@ -126,24 +126,24 @@ const Index = () => {
       <DashboardMetrics />
 
       {/* Charts and Activity */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Component Distribution Chart */}
         <Card className="railway-card">
           <CardHeader>
-            <CardTitle className="flex items-center">
-              <TrendingUp className="mr-2 h-5 w-5 text-primary" />
+            <CardTitle className="flex items-center text-sm sm:text-base">
+              <TrendingUp className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Component Distribution
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs sm:text-sm">
               Breakdown of components by type
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={180}>
               <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="type" fontSize={12} />
-                <YAxis fontSize={12} />
+                <XAxis dataKey="type" fontSize={10} />
+                <YAxis fontSize={10} />
                 <Tooltip />
                 <Bar dataKey="count" fill="hsl(var(--primary))" />
               </BarChart>
@@ -154,19 +154,19 @@ const Index = () => {
         {/* Status Distribution Pie Chart */}
         <Card className="railway-card">
           <CardHeader>
-            <CardTitle>Component Status</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-sm sm:text-base">Component Status</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
               Current status breakdown
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={180}>
               <PieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  outerRadius={80}
+                  outerRadius={60}
                   dataKey="value"
                 >
                   {pieData.map((entry, index) => (
@@ -182,7 +182,7 @@ const Index = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Recent Components */}
         <Card className="railway-card">
           <CardHeader>

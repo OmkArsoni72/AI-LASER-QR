@@ -66,39 +66,40 @@ const VendorsPage = () => {
   };
 
   return (
-    <div className="flex-1 space-y-6 p-6">
+    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Vendor Management</h1>
-          <p className="text-muted-foreground mt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-responsive-xl font-bold text-foreground">Vendor Management</h1>
+          <p className="text-responsive-sm text-muted-foreground mt-1">
             Manage vendor relationships and performance metrics
           </p>
         </div>
         
-        <Button className="bg-gradient-hero text-white hover:opacity-90">
+        <Button className="bg-gradient-hero text-white hover:opacity-90 btn-mobile shrink-0">
           <Plus className="mr-2 h-4 w-4" />
-          Add Vendor
+          <span className="hidden sm:inline">Add Vendor</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
-            <Users className="h-8 w-8 text-primary mr-4" />
-            <div>
-              <p className="text-2xl font-bold">{vendors.length}</p>
+          <CardContent className="flex items-center p-3 sm:p-6">
+            <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2 sm:mr-4 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-lg sm:text-2xl font-bold">{vendors.length}</p>
               <p className="text-xs text-muted-foreground">Total Vendors</p>
             </div>
           </CardContent>
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
-            <Package className="h-8 w-8 text-success mr-4" />
-            <div>
-              <p className="text-2xl font-bold">
+          <CardContent className="flex items-center p-3 sm:p-6">
+            <Package className="h-6 w-6 sm:h-8 sm:w-8 text-success mr-2 sm:mr-4 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-lg sm:text-2xl font-bold">
                 {vendors.reduce((sum, vendor) => sum + getVendorStats(vendor.id).activeComponents, 0)}
               </p>
               <p className="text-xs text-muted-foreground">Active Components</p>
@@ -107,10 +108,10 @@ const VendorsPage = () => {
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
-            <Shield className="h-8 w-8 text-warning mr-4" />
-            <div>
-              <p className="text-2xl font-bold">
+          <CardContent className="flex items-center p-3 sm:p-6">
+            <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-warning mr-2 sm:mr-4 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-lg sm:text-2xl font-bold">
                 {vendors.reduce((sum, vendor) => sum + getVendorStats(vendor.id).pendingClaims, 0)}
               </p>
               <p className="text-xs text-muted-foreground">Pending Claims</p>
@@ -119,10 +120,10 @@ const VendorsPage = () => {
         </Card>
         
         <Card className="railway-card">
-          <CardContent className="flex items-center p-6">
-            <Star className="h-8 w-8 text-warning mr-4" />
-            <div>
-              <p className="text-2xl font-bold">
+          <CardContent className="flex items-center p-3 sm:p-6">
+            <Star className="h-6 w-6 sm:h-8 sm:w-8 text-warning mr-2 sm:mr-4 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-lg sm:text-2xl font-bold">
                 {(vendors.reduce((sum, vendor) => sum + vendor.rating, 0) / vendors.length).toFixed(1)}
               </p>
               <p className="text-xs text-muted-foreground">Avg Rating</p>
@@ -153,36 +154,38 @@ const VendorsPage = () => {
           </div>
 
           {/* Vendors Grid */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {filteredVendors.map((vendor) => {
               const stats = getVendorStats(vendor.id);
               
               return (
                 <Card key={vendor.id} className="railway-card hover:shadow-lg transition-shadow">
                   <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center space-x-3">
-                        <Avatar className="h-12 w-12 bg-primary/10">
-                          <AvatarFallback className="text-primary font-semibold">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                      <div className="flex items-center space-x-3 min-w-0 flex-1">
+                        <Avatar className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 shrink-0">
+                          <AvatarFallback className="text-primary font-semibold text-sm">
                             {vendor.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
                           </AvatarFallback>
                         </Avatar>
-                        <div>
-                          <h3 className="font-semibold text-lg">{vendor.name}</h3>
-                          <div className="flex items-center space-x-1">
-                            {getRatingStars(Math.floor(vendor.rating))}
-                            <span className="text-sm text-muted-foreground ml-1">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-semibold text-responsive-base truncate">{vendor.name}</h3>
+                          <div className="flex items-center space-x-1 mt-1">
+                            <div className="flex">
+                              {getRatingStars(Math.floor(vendor.rating))}
+                            </div>
+                            <span className="text-xs sm:text-sm text-muted-foreground ml-1">
                               ({vendor.rating})
                             </span>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="flex space-x-1">
-                        <Button variant="ghost" size="sm">
+                      <div className="flex space-x-1 shrink-0">
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                           <Eye className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                           <Edit className="h-4 w-4" />
                         </Button>
                       </div>
@@ -192,17 +195,17 @@ const VendorsPage = () => {
                   <CardContent className="space-y-4">
                     {/* Contact Info */}
                     <div className="space-y-2">
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Mail className="mr-2 h-4 w-4" />
+                      <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
+                        <Mail className="mr-2 h-4 w-4 shrink-0" />
                         <span className="truncate">{vendor.email}</span>
                       </div>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Phone className="mr-2 h-4 w-4" />
+                      <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
+                        <Phone className="mr-2 h-4 w-4 shrink-0" />
                         <span>{vendor.phone}</span>
                       </div>
-                      <div className="flex items-start text-sm text-muted-foreground">
-                        <MapPin className="mr-2 h-4 w-4 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs leading-relaxed">{vendor.address}</span>
+                      <div className="flex items-start text-xs sm:text-sm text-muted-foreground">
+                        <MapPin className="mr-2 h-4 w-4 mt-0.5 shrink-0" />
+                        <span className="text-xs leading-relaxed break-words">{vendor.address}</span>
                       </div>
                     </div>
 
@@ -251,12 +254,13 @@ const VendorsPage = () => {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex space-x-2 pt-2">
-                      <Button variant="outline" size="sm" className="flex-1">
+                    <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                      <Button variant="outline" size="sm" className="flex-1 btn-mobile">
                         <Package className="mr-2 h-4 w-4" />
-                        Components
+                        <span className="hidden sm:inline">Components</span>
+                        <span className="sm:hidden">Parts</span>
                       </Button>
-                      <Button variant="outline" size="sm" className="flex-1">
+                      <Button variant="outline" size="sm" className="flex-1 btn-mobile">
                         <Shield className="mr-2 h-4 w-4" />
                         Claims
                       </Button>
@@ -291,7 +295,7 @@ const VendorsPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {vendors
               .sort((a, b) => {
                 const aStats = getVendorStats(a.id);
@@ -304,26 +308,29 @@ const VendorsPage = () => {
                 const stats = getVendorStats(vendor.id);
                 
                 return (
-                  <div key={vendor.id} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-bold">
+                  <div key={vendor.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-muted/30 rounded-lg gap-3">
+                    <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
+                      <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary/10 text-primary font-bold text-sm sm:text-base shrink-0">
                         {index + 1}
                       </div>
-                      <div>
-                        <p className="font-medium">{vendor.name}</p>
-                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-responsive-sm truncate">{vendor.name}</p>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-xs sm:text-sm text-muted-foreground gap-1">
                           <span>{stats.totalComponents} components</span>
                           <div className="flex items-center space-x-1">
-                            {getRatingStars(Math.floor(vendor.rating))}
+                            <div className="flex">
+                              {getRatingStars(Math.floor(vendor.rating))}
+                            </div>
                             <span>({vendor.rating})</span>
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="text-right">
-                      <Badge className={getDefectRateBadge(stats.defectRate)}>
-                        {stats.defectRate.toFixed(1)}% defect rate
+                    <div className="flex justify-end shrink-0">
+                      <Badge className={`text-xs ${getDefectRateBadge(stats.defectRate)}`}>
+                        <span className="hidden sm:inline">{stats.defectRate.toFixed(1)}% defect rate</span>
+                        <span className="sm:hidden">{stats.defectRate.toFixed(1)}%</span>
                       </Badge>
                     </div>
                   </div>

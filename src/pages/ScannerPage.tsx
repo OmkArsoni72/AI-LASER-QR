@@ -137,18 +137,18 @@ const ScannerPage = () => {
   };
 
   return (
-    <div className="flex-1 space-y-6 p-6">
+    <div className="flex-1 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">QR Code Scanner</h1>
-          <p className="text-muted-foreground mt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">QR Code Scanner</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
             Scan component QR codes or enter manually for instant access
           </p>
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 xl:grid-cols-2">
         {/* Scanner Interface */}
         <Card className="railway-card">
           <CardHeader>
