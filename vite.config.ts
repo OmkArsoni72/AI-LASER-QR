@@ -20,7 +20,18 @@ export default defineConfig(({ mode }) => ({
     dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: [
+      'react', 
+      'react-dom', 
+      'react-router-dom',
+      '@radix-ui/react-slot',
+      'clsx',
+      'class-variance-authority'
+    ],
+  },
+  esbuild: {
+    // Ensure proper JS output for older browsers
+    target: 'es2020',
   },
     build: {
       chunkSizeWarningLimit: 2000,

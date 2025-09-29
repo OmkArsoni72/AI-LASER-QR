@@ -17,9 +17,9 @@
     <meta name="twitter:image" content="" />
     
     <style>
-      /* Fallback styles if JS fails to load */
+      /* Enhanced fallback with better debugging */
       #root:empty::before {
-        content: "Loading...";
+        content: "Loading JavaScript bundle...";
         display: flex;
         align-items: center;
         justify-content: center;
@@ -27,13 +27,38 @@
         font-family: system-ui, -apple-system, sans-serif;
         font-size: 1.2rem;
         color: #666;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        padding: 2rem;
       }
       
       /* Hide loading text once React renders */
       #root:not(:empty)::before {
         display: none;
       }
+      
+      /* Fallback if JS takes too long */
+      .js-error {
+        background: #fee2e2;
+        border: 2px solid #dc2626;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 8px;
+        font-family: system-ui, sans-serif;
+        color: #dc2626;
+      }
     </style>
+    
+    <script>
+      // Timeout fallback - if React doesn't load in 10 seconds, show error
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.trim() === '') {
+          root.innerHTML = '<div class="js-error"><h2>JavaScript Loading Failed</h2><p>The app failed to load. This might be due to:</p><ul><li>Network connectivity issues</li><li>JavaScript disabled in browser</li><li>Content Security Policy restrictions</li></ul><button onclick="window.location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #dc2626; color: white; border: none; border-radius: 4px; cursor: pointer;">Reload Page</button></div>';
+        }
+      }, 10000);
+    </script>
   </head>
 
   <body>
