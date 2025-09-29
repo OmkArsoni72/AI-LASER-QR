@@ -5,7 +5,6 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Explicit base path so asset URLs resolve correctly in deployment.
   base: '/',
   server: {
     host: "::",
@@ -16,38 +15,22 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    // Ensure React is resolved correctly to prevent createContext undefined errors
-    dedupe: ['react', 'react-dom'],
   },
-  optimizeDeps: {
-    include: [
-      'react', 
-      'react-dom', 
-      'react-router-dom',
-      '@radix-ui/react-slot',
-      'clsx',
-      'class-variance-authority'
-    ],
-  },
-  esbuild: {
-    // Ensure proper JS output for older browsers
-    target: 'es2020',
-  },
-    build: {
-      chunkSizeWarningLimit: 2000,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              // Keep React and ReactDOM together to avoid context issues
-              if (id.includes('react') || id.includes('react-dom')) return 'vendor-react';
-              if (id.includes('@radix-ui')) return 'vendor-radix';
-              if (id.includes('@tanstack')) return 'vendor-tanstack';
-              if (id.includes('recharts')) return 'vendor-charts';
-              return 'vendor';
-            }
-          },
+  build: {
+    // Simpler build config for Vercel compatibility
+    target: 'es2015',
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        // Simpler chunking strategy
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
         },
       },
     },
-  }));
+  },
+}));
