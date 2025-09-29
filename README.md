@@ -69,4 +69,4 @@ To connect a domain, navigate to Project > Settings > Domains and click Connect 
 >>>>>>>>>>>>>>some changes by omkar 
 # AI-LASER-QR
 # AI-LASER-QR
-# AI-LASER-QR
+
