@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import TestApp from "./TestApp.tsx";
 import "./index.css";
 import { ErrorBoundary } from "./components/ErrorBoundary.tsx";
 
@@ -40,8 +41,11 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
+// Use TestApp for debugging, switch to full App once working
+const useTestApp = !window.location.search.includes('full=true');
+
 createRoot(rootElement).render(
   <ErrorBoundary>
-    <App />
+    {useTestApp ? <TestApp /> : <App />}
   </ErrorBoundary>
 );
