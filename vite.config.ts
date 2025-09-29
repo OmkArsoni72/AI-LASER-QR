@@ -5,6 +5,9 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Explicit base path so asset URLs resolve correctly in deployment.
+  // If you ever deploy under a sub-path (e.g. /app), change this to that path or to './'.
+  base: '/',
   server: {
     host: "::",
     port: 8080,
