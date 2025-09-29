@@ -1,4 +1,13 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCo    <div className="flex-1 space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-responsive-xl font-bold text-foreground">Settings</h1>
+          <p className="text-responsive-sm text-muted-foreground mt-1">
+            Configure system preferences and account settings
+          </p>
+        </div>
+      </div>dDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
